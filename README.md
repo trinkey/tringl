@@ -14,6 +14,8 @@ str2 = "more random text"
 
 ## todo list
 - cry
+- embeds
+- procrastinate
 - add captcha variable time settings
 - add captcha to posting messages
 - push notifications
