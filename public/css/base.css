@@ -1,0 +1,102 @@
+body {
+  text-align: center;
+  font-family: Arial;
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+a {
+  cursor: pointer;
+  color: #ec86a6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+textarea,
+input {
+  width: 22em;
+  font-size: 0.8em;
+  border: none;
+}
+
+textarea {
+  font-family: Arial;
+  resize: vertical;
+  height: 5em;
+}
+
+input:focus {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:active {
+  scale: 95%;
+}
+
+textarea,
+input,
+button {
+  background-color: #11111b;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin: 3px;
+  border: none;
+  color: #cdd6f4;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #a6adc8;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #a6adc8;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #a6adc8;
+}
+
+input::-ms-input-placeholder, textarea::-ms-input-placeholder {
+  color: #a6adc8;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #a6adc8;
+}
+
+.msg {
+  width: 30em;
+  border: 2px solid #cdd6f4;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 10px;
+  margin: 15px;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+@media screen and (max-width: 720px) {
+  .msg {
+    width: 80vw;
+  }
+}
+
+hr {
+  max-width: 25em;
+  border: 2px #a6adc8 solid;
+  border-radius: 2px;
+}
+
+h3 {
+  margin: 0px;
+}

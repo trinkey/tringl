@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Page not found - TrinkeyNGL</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <script src="/js/base.js"></script>
+  </head>
+
+  <body>
+    <h1>Page not found!</h1>
+    Maybe you tried to message someone who doesn't exist.<br>
+    Maybe you just made a typo.<br>
+    <h3>Who knows?</h3>
+    Only you.<br><br>
+    Anyways you can return to the <a href="/">main page</a> if you want, or you can stay here a while.
+    <div id="special" hidden>
+      <br><br>
+      You've been here for <span id="time"></span>.
+    </div>
+
+    <script>
+      let count = 0;
+      let start = new Date().getTime() / 1000;
+
+      setInterval(
+        function() {
+          count++;
+          if (count == 30) {
+            document.getElementById("special").removeAttribute("hidden");
+          }
+          document.getElementById("time").innerText = timeSince(start);
+        }, 1000
+      );
+    </script>
+  </body>
+</html>
