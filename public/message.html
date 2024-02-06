@@ -54,8 +54,10 @@
             "name": document.getElementById("name").value || "Anonymous"
           })
         }).then((response) => {
-          if (response.status == 200) { showLog("Success!"); }
-          else { showLog("Something went wrong!"); }
+          if (response.status == 200) {
+            showLog("Success!");
+            document.getElementById("message").value = "";
+          } else { showLog("Something went wrong!"); }
           document.getElementById("send").removeAttribute("disabled");
         }).catch((err) => {
           showLog("Something went wrong!");
