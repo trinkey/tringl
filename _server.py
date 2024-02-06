@@ -206,13 +206,13 @@ def api_messages_get():
     )
 
 def api_messages_post_(user):
-    time.sleep(0.25) # Artifical delay to prevent spamming
-
     for i in user:
         if i not in "abcdefghijklmnopqrstuvwxyz0123456789_":
             flask.abort(400)
 
     x = json.loads(request.get_data())
+
+    time.sleep(0.25) # Artifical delay to prevent spamming
 
     messages = [{"message": x["message"], "name": x["name"], "time": round(time.time())}] + get_user_messages(user)
     open(f"{SAVING_DIR}messages/{user}.json", "w").write(json.dumps(messages))
