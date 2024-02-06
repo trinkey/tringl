@@ -9,9 +9,10 @@ import os
 
 import secret_file
 
-from flask import request
+from flask import request, redirect
+from werkzeug.middleware.proxy_fix import ProxyFix
 
-app = flask.Flask(__name__)
+UPGRADE_TO_HTTPS = False
 SAVING_DIR = "./save/"
 CONTENT_DIR = "./public/"
 
@@ -239,6 +240,8 @@ ensure_file(SAVING_DIR, folder=True)
 ensure_file(f"{SAVING_DIR}users", folder=True)
 ensure_file(f"{SAVING_DIR}messages", folder=True)
 
+app = flask.Flask(__name__)
+
 app.route("/", methods=["GET"])(create_static_route("index.html"))
 app.route("/login", methods=["GET"])(create_static_route("login.html"))
 app.route("/signup", methods=["GET"])(create_captcha_route("signup.html"))
@@ -255,6 +258,15 @@ app.route("/api/messages/list", methods=["GET"])(api_messages_get)
 app.route("/api/messages/post/<path:user>", methods=["POST"])(api_messages_post_)
 
 app.errorhandler(404)(create_static_route("404.html"))
+
+if UPGRADE_TO_HTTPS:
+    app.wsgi_app = ProxyFix(app.wsgi_app)
+
+    @app.before_request
+    def enforce_https():
+        if not request.is_secure:
+            url = request.url.replace('http://', 'https://', 1)
+            return redirect(url, code=301)
 
 if __name__ == "__main__":
     app.run(port=80, debug=True, host="0.0.0.0")
