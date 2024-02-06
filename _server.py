@@ -212,6 +212,9 @@ def api_messages_post_(user):
 
     x = json.loads(request.get_data())
 
+    if len(x["message"]) == 0 or len(x["message"]) > 512 or len(x["name"]) > 24:
+        flask.abort(401)
+
     time.sleep(0.25) # Artifical delay to prevent spamming
 
     messages = [{"message": x["message"], "name": x["name"], "time": round(time.time())}] + get_user_messages(user)
