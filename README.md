@@ -13,6 +13,7 @@ str2 = "more random text"
 4. run the `_server.py` file (make sure you have all the right python libraries)
 
 ## todo list
+- validate message and name length in `api_message_post_`
 - cry
 - embeds
 - procrastinate
