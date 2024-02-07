@@ -18,6 +18,7 @@
 
     <input autocapitalize="off" placeholder="Username..." id="username" maxlength="24"><br>
     <input autocapitalize="off" placeholder="Password..." type="password" id="password"><br><br>
+    <div id="info"></div>
     <button id="submit">Submit</button><br>
     <button id="toggle">Show password</button><br><br>
     <a href="/signup">Sign up instead...</a>
@@ -55,10 +56,10 @@
             if (response.status == 200) {
               // Continue
             } else if (response.status == 400) {
-              showLog("Bad username or password. Make sure the username only uses a-z, 0-9, and underscores and the password isn't blank.")
+              showLog("Bad username or password. Make sure your username and password are both correct.")
             } else if (response.status == 401) {
-              showLog("An account with this username already exists!");
-              throw new Error("Account already exists");
+              showLog("An account with this username doesn't exist!");
+              throw new Error("Account doesn't exist");
             } else {
               showLog("An unknown error occured. Status code " + response.status);
               throw new Error("Unknown error");
