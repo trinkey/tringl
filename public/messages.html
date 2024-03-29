@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Messages - TrinkeyNGL</title>
+    <title>Messages - TriNGL</title>
     <link rel="stylesheet" href="/css/base.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -16,7 +16,7 @@
       }
 
       let username = localStorage.getItem("token").split("-")[0];
-      let pageLink = 'https://ngl.pythonanywhere.com/m/' + username;
+      let pageLink = 'https://tr-ngl.web.app/m/' + username;
     </script>
   </head>
 
@@ -24,50 +24,13 @@
     <h1>Your Messages</h1>
     Click <a onclick="navigator.clipboard.writeText(pageLink)">here</a> to copy your message link!<br><br>
     <button onclick="loadMessages()">Refresh</button>
+    <button onclick="clearMessages()">Clear messages</button>
+
     <div id="info"></div>
     <div id="output"></div>
 
     <a href="/logout">Log out</a>
 
-    <script>
-      let c = 0;
-      let showLog = (str) => {
-        c++;
-        document.getElementById("info").innerHTML = str;
-        setTimeout(function() {
-          --c;
-          if (!c) {
-            document.getElementById("info").innerHTML = "";
-          }
-        }, 5000);
-      };
-
-      function loadMessages() {
-        document.getElementById("output").setAttribute("style", "opacity: 25%;");
-        fetch("/api/messages/list")
-          .then((response) => (response.json()))
-          .then((json) => {
-            let output = "";
-
-            for (let i = 0; i < json.length; i++) {
-              output += `
-              <div class="msg">
-                <b>${escapeHTML(json[i].name)}</b>
-                <span style="opacity: 50%;"> - ${timeSince(json[i].time)} ago</span><br>
-                ${escapeHTML(json[i].message)}
-              </div><br>`;
-            }
-
-            document.getElementById("output").innerHTML = output;
-            document.getElementById("output").removeAttribute("style");
-          })
-          .catch((err) => {
-            showLog("Something went wrong loading the messages! Try again in a few moments...");
-            throw err;
-          });
-      }
-
-      loadMessages();
-    </script>
+    <script src="/js/messages.js"></script>
   </body>
 </html>

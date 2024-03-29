@@ -7,9 +7,19 @@ body {
   font-weight: 400;
 }
 
+hr {
+  max-width: 25em;
+  border: 2px #a6adc8 solid;
+  border-radius: 2px;
+}
+
+h3 {
+  margin: 0px;
+}
+
 a {
   cursor: pointer;
-  color: #ec86a6;
+  color: #f38ba8;
   text-decoration: none;
 }
 
@@ -17,21 +27,28 @@ a:hover {
   text-decoration: underline;
 }
 
-textarea,
-input {
+a:focus {
+  outline: none;
+  border: 1px solid #f38ba8;
+  padding: 1px;
+  margin: -2px;
+}
+
+textarea, input {
   width: 22em;
   font-size: 0.8em;
   border: none;
+}
+
+textarea:focus, input:focus, button:focus {
+  outline: none;
+  border-color: #45475a;
 }
 
 textarea {
   font-family: Arial;
   resize: vertical;
   height: 5em;
-}
-
-input:focus {
-  outline: none;
 }
 
 button {
@@ -42,41 +59,23 @@ button:active {
   scale: 95%;
 }
 
-textarea,
-input,
-button {
+textarea, input, button {
   background-color: #11111b;
   padding: 5px 10px;
   border-radius: 4px;
   margin: 3px;
   border: none;
   color: #cdd6f4;
+  border: 1px solid #313244;
 }
 
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  color: #a6adc8;
-}
-
-input::-moz-placeholder, textarea::-moz-placeholder {
-  color: #a6adc8;
-}
-
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  color: #a6adc8;
-}
-
-input::-ms-input-placeholder, textarea::-ms-input-placeholder {
-  color: #a6adc8;
-}
-
-input::placeholder,
-textarea::placeholder {
+input::placeholder, textarea::placeholder {
   color: #a6adc8;
 }
 
 .msg {
   width: 30em;
-  border: 2px solid #cdd6f4;
+  border: 2px solid #585b70;
   border-radius: 5px;
   display: inline-block;
   padding: 10px;
@@ -85,18 +84,12 @@ textarea::placeholder {
   word-wrap: break-word;
 }
 
+.msg span {
+  color: #a6adc8;
+}
+
 @media screen and (max-width: 720px) {
   .msg {
     width: 80vw;
   }
-}
-
-hr {
-  max-width: 25em;
-  border: 2px #a6adc8 solid;
-  border-radius: 2px;
-}
-
-h3 {
-  margin: 0px;
 }

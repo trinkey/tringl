@@ -1,4 +1,4 @@
-# ngl v2
+# TriNGL
 it's like ngl but i made it
 
 ## how to use
@@ -9,13 +9,13 @@ it's like ngl but i made it
 str1 = "random text"
 str2 = "more random text"
 ```
-(you can make the text anything, although changing it will likely prevent any current accounts from being able to log in)
-4. run the `_server.py` file (make sure you have all the right python libraries)
+(you can make the text anything, although changing it will likely (99.999% chance) prevent any current accounts from being able to log in)
+
+4. run the `_server.py` file (make sure you have all the right python libraries aka flask)
 
 ## todo list
-- cry
+- make it so i actually like this program instead of putting like 25% effort into it
 - embeds
-- procrastinate
 - add captcha variable time settings
 - add captcha to posting messages
 - push notifications

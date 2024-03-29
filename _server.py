@@ -158,11 +158,9 @@ def api_account_signup():
         default_value="[]"
     )
 
-    return content_type_response(
-        json.dumps({
-            "token": token
-        }), "application/json"
-    )
+    return {
+        "token": token
+    }
 
 def api_account_login():
     x = json.loads(request.get_data())
@@ -201,10 +199,24 @@ def api_messages_get():
     if token != get_user_info(username)["token"]:
         flask.abort(403)
 
-    return content_type_response(
-        json.dumps(get_user_messages(username)),
-        "application/json"
-    )
+    return get_user_messages(username)
+
+def api_messages_clear():
+    username = request.cookies["token"].split("-")[0]
+    token = request.cookies["token"]
+
+    for i in username:
+        if i not in "abcdefghijklmnopqrstuvwxyz0123456789_":
+            flask.abort(400)
+
+    if token != get_user_info(username)["token"]:
+        flask.abort(403)
+
+    f = open(f"{SAVING_DIR}messages/{username}.json", "w")
+    f.write("[]")
+    f.close()
+
+    return "200 OK"
 
 def api_messages_post_(user):
     for i in user:
@@ -215,8 +227,6 @@ def api_messages_post_(user):
 
     if len(x["message"]) == 0 or len(x["message"]) > 512 or len(x["name"]) > 24:
         flask.abort(401)
-
-    time.sleep(0.25) # Artifical delay to prevent spamming
 
     messages = [{"message": x["message"], "name": x["name"], "time": round(time.time())}] + get_user_messages(user)
     open(f"{SAVING_DIR}messages/{user}.json", "w").write(json.dumps(messages))
@@ -251,11 +261,16 @@ app.route("/m/<path:user>", methods=["GET"])(message_)
 
 app.route("/css/base.css", methods=["GET"])(create_static_route("css/base.css"))
 app.route("/js/base.js", methods=["GET"])(create_static_route("js/base.js"))
+app.route("/js/login.js", methods=["GET"])(create_static_route("js/login.js"))
+app.route("/js/signup.js", methods=["GET"])(create_static_route("js/signup.js"))
+app.route("/js/message.js", methods=["GET"])(create_static_route("js/message.js"))
+app.route("/js/messages.js", methods=["GET"])(create_static_route("js/messages.js"))
 
 app.route("/api/account/signup", methods=["POST"])(api_account_signup)
 app.route("/api/account/login", methods=["POST"])(api_account_login)
 app.route("/api/messages/list", methods=["GET"])(api_messages_get)
 app.route("/api/messages/post/<path:user>", methods=["POST"])(api_messages_post_)
+app.route("/api/messages/clear", methods=["DELETE"])(api_messages_clear)
 
 app.errorhandler(404)(create_static_route("404.html"))
 
@@ -269,4 +284,4 @@ if UPGRADE_TO_HTTPS:
             return redirect(url, code=301)
 
 if __name__ == "__main__":
-    app.run(port=80, debug=True, host="0.0.0.0")
+    app.run(port=80, debug=True)
