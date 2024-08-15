@@ -1,3 +1,6 @@
+> [!NOTE]  
+> This repository has been **migrated** to [git.gay](https://git.gay/trinkey/tringl). The Github version will **no longer be maintained**.
+
 # TriNGL
 it's like ngl but i made it
 
